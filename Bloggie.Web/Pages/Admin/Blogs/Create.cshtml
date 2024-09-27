@@ -1,0 +1,68 @@
+﻿@page
+@model Bloggie.Web.Pages.Admin.Blogs.CreateModel
+@{
+    ViewData["Title"] = "Create Blog Post";
+}
+
+<div class="bg-secondary bg-opacity-10 py-2 mb-5">
+    <div class="container">
+        <h1>Create Blog Post</h1>
+    </div>
+</div>
+
+<div>
+    <div class="container">
+        <form method="post">
+            <div class="mb-3">
+                <label class="form-lable" asp-for="BlogPost.Heading"></label>
+                <input class="form-control" asp-for="BlogPost.Heading" type="text" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-lable" asp-for="BlogPost.PageTitle"></label>
+                <input class="form-control" asp-for="BlogPost.PageTitle" type="text" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-lable" asp-for="BlogPost.ShortDescription"></label>
+                <input class="form-control" asp-for="BlogPost.ShortDescription" type="text" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-lable" asp-for="BlogPost.Content"></label>
+                <textarea class="form-control" asp-for="BlogPost.Content" rows="8"></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-lable" asp-for="BlogPost.FeatureImageUrl"></label>
+                <input class="form-control" asp-for="BlogPost.FeatureImageUrl" type="text" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-lable" asp-for="BlogPost.UrlHandle"></label>
+                <input class="form-control" asp-for="BlogPost.UrlHandle" type="text" />
+             </div>
+
+            <div class="mb-3">
+                <label class="form-lable" asp-for="BlogPost.PublicationDate"></label>
+                <input class="form-control" asp-for="BlogPost.PublicationDate" type="date" />
+            </div>
+
+            <div action="mb-3">
+                <label class="form-lable" asp-for="BlogPost.Author"></label>
+                <input class="form-control" asp-for="BlogPost.Author" type="text" />
+            </div>
+
+            <div class="mb-3">
+                <div class="form-check">
+                    <input class="form-check-input" asp-for="BlogPost.Visible" type="checkbox" />
+                    <label class="form-check-lable" asp-for="BlogPost.Visible"></label>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <button class="btn btn-primary" type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
