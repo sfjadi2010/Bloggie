@@ -31,6 +31,6 @@ public class CreateModel : PageModel
         _context.BlogPosts.Add(BlogPost);
         await _context.SaveChangesAsync();
 
-        return RedirectToPage("./Index");
+        return RedirectToPage("/Admin/Blogs/List");
     }
 }
