@@ -1,0 +1,58 @@
+﻿@model Bloggie.Web.Models.Domain.BlogPost
+
+<div>
+    <div class="container">
+        <form method="post">
+            <div class="mb-3">
+                <label class="form-lable" asp-for="Heading"></label>
+                <input class="form-control" asp-for="Heading" type="text" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-lable" asp-for="PageTitle"></label>
+                <input class="form-control" asp-for="PageTitle" type="text" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-lable" asp-for="ShortDescription"></label>
+                <input class="form-control" asp-for="ShortDescription" type="text" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-lable" asp-for="Content"></label>
+                <textarea class="form-control" asp-for="Content" rows="8"></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-lable" asp-for="FeatureImageUrl"></label>
+                <input class="form-control" asp-for="FeatureImageUrl" type="text" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-lable" asp-for="UrlHandle"></label>
+                <input class="form-control" asp-for="UrlHandle" type="text" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-lable" asp-for="PublicationDate"></label>
+                <input class="form-control" asp-for="PublicationDate" type="date" />
+            </div>
+
+            <div action="mb-3">
+                <label class="form-lable" asp-for="Author"></label>
+                <input class="form-control" asp-for="Author" type="text" />
+            </div>
+
+            <div class="mb-3">
+                <div class="form-check">
+                    <input class="form-check-input" asp-for="Visible" type="checkbox" />
+                    <label class="form-check-lable" asp-for="Visible"></label>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <button class="btn btn-primary" type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -19,7 +19,25 @@ public class EditModel : PageModel
 
     public async Task<IActionResult> OnGetAsync(Guid id)
     {
-        BlogPost = await _context.BlogPosts.FindAsync(id);
+        var result = await _context.BlogPosts.FindAsync(id);
+
+        if (result is not null)
+        {
+            BlogPost = result;
+        }
         return Page();
+    }
+
+    public async Task<IActionResult> OnPostAsync()
+    {
+        if (!ModelState.IsValid)
+        {
+            return Page();
+        }
+
+        _context.BlogPosts.Update(BlogPost);
+        await _context.SaveChangesAsync();
+
+        return RedirectToPage("/Admin/Blogs/List");
     }
 }
