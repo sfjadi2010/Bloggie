@@ -1,37 +1,30 @@
-using Bloggie.Web.DataContext;
 using Bloggie.Web.Models.Domain;
+using Bloggie.Web.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
 
 namespace Bloggie.Web.Pages.Admin.Blogs;
 public class ListModel : PageModel
 {
-    private readonly BloggieDbContext _context;
+    private readonly IBlogPostService _blogPostService;
 
-    public ListModel(BloggieDbContext context)
+    public ListModel(IBlogPostService blogPostService)
     {
-        _context = context;
+        _blogPostService = blogPostService;
     }
 
     [BindProperty]
-    public List<BlogPost> Posts { get; set; } = default!;
+    public IEnumerable<BlogPost> Posts { get; set; } = default!;
 
     public async Task<IActionResult> OnGetAsync()
     {
-        Posts = await _context.BlogPosts.ToListAsync();
+        Posts = await _blogPostService.GetAllAsync();
         return Page();
     }
 
     public async Task<IActionResult> OnPostDeleteAsync([FromBody] Guid id)
     {
-        var post = await _context.BlogPosts.FindAsync(id);
-
-        if (post is not null)
-        {
-            _context.BlogPosts.Remove(post);
-            await _context.SaveChangesAsync();
-        }
+        await _blogPostService.DeleteAsync(id);
 
         return RedirectToPage();
     }
