@@ -11,3 +11,11 @@
 </div>
 
 @await Html.PartialAsync("PartialViews/BlogForm", Model.BlogPost)
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            var editor = new FroalaEditor('#Content');
+        });
+    </script>
+}
