@@ -1,5 +1,5 @@
-using Bloggie.Web.DataContext;
 using Bloggie.Web.Models.Domain;
+using Bloggie.Web.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -7,11 +7,11 @@ namespace Bloggie.Web.Pages.Admin.Blogs;
 
 public class EditModel : PageModel
 {
-    private readonly BloggieDbContext _context;
+    private readonly IBlogPostService _blogPostService;
 
-    public EditModel(BloggieDbContext context)
+    public EditModel(IBlogPostService blogPostService)
     {
-        _context = context;
+        _blogPostService = blogPostService;
     }
 
     [BindProperty]
@@ -19,7 +19,7 @@ public class EditModel : PageModel
 
     public async Task<IActionResult> OnGetAsync(Guid id)
     {
-        var result = await _context.BlogPosts.FindAsync(id);
+        var result = await _blogPostService.GetAsync(id);
 
         if (result is not null)
         {
@@ -35,8 +35,7 @@ public class EditModel : PageModel
             return Page();
         }
 
-        _context.BlogPosts.Update(BlogPost);
-        await _context.SaveChangesAsync();
+        await _blogPostService.UpdateAsync(BlogPost);
 
         return RedirectToPage("/Admin/Blogs/List");
     }

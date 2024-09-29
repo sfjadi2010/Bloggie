@@ -78,7 +78,6 @@
         });
 
         document.getElementById('confirmDeleteButton').addEventListener('click', function () {
-            debugger;
             var token = document.querySelector('input[name="__RequestVerificationToken"]').value;
             fetch('/Admin/Blogs/List?handler=Delete', {
                 method: 'POST',

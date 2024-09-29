@@ -1,5 +1,5 @@
-using Bloggie.Web.DataContext;
 using Bloggie.Web.Models.Domain;
+using Bloggie.Web.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -7,11 +7,11 @@ namespace Bloggie.Web.Pages.Admin.Blogs;
 
 public class CreateModel : PageModel
 {
-    private readonly BloggieDbContext _context;
+    private readonly IBlogPostService _blogPostService;
 
-    public CreateModel(BloggieDbContext context)
+    public CreateModel(IBlogPostService blogPostService)
     {
-        _context = context;
+        _blogPostService = blogPostService;
     }
 
     public void OnGet()
@@ -23,13 +23,7 @@ public class CreateModel : PageModel
 
     public async Task<IActionResult> OnPostAsync()
     {
-        if (!ModelState.IsValid)
-        {
-            return Page();
-        }
-
-        await _context.BlogPosts.AddAsync(BlogPost);
-        await _context.SaveChangesAsync();
+        await _blogPostService.CreateAsync(BlogPost);
 
         return RedirectToPage("/Admin/Blogs/List");
     }
