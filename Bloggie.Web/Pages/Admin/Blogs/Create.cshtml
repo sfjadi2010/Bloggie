@@ -10,12 +10,37 @@
     </div>
 </div>
 
+@Html.AntiForgeryToken()
 @await Html.PartialAsync("PartialViews/BlogForm", Model.BlogPost)
 
 @section Scripts {
     <script>
         $(document).ready(function () {
             var editor = new FroalaEditor('#Content');
+
+            const imageFileUpload = document.getElementById('imageFileUpload');
+            const featuredImage = document.getElementById('featuredImage');
+            const featureImageUrl = document.getElementById('FeatureImageUrl');
+
+            async function uploadFeatureImage(e)
+            {
+                let data = new FormData();
+                data.append('file', e.target.files[0]);
+
+                await fetch('/api/images', {
+                    method: 'POST',
+                    headers: {
+                        'Accept': '*/*'
+                    },
+                    body: data
+                }).then(response => response.text())
+                .then(result => {
+                    featureImageUrl.value = result;
+                    featuredImage.src = result;
+                });
+            }
+
+            imageFileUpload.addEventListener('change', uploadFeatureImage );
         });
     </script>
 }

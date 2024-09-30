@@ -20,12 +20,21 @@
 
             <div class="mb-3">
                 <label class="form-lable" asp-for="Content"></label>
-                <textarea class="form-control" asp-for="Content" rows="8"></textarea>
+                <textarea class="form-control" asp-for="Content" rows="10"></textarea>
+            </div>
+
+            <div class="input-group mb-3">
+                <input type="file" class="form-control" id="imageFileUpload">
+                <label class="input-group-text" for="imageFileUpload">Upload</label>
+            </div>
+
+            <div class="mb-3">
+                <img id="featuredImage" class="img-thumbnail" />
             </div>
 
             <div class="mb-3">
                 <label class="form-lable" asp-for="FeatureImageUrl"></label>
-                <input class="form-control" asp-for="FeatureImageUrl" type="text" />
+                <input readonly class="form-control" asp-for="FeatureImageUrl" type="text" />
             </div>
 
             <div class="mb-3">
