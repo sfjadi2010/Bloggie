@@ -29,7 +29,13 @@
             </div>
 
             <div class="mb-3">
-                <img id="featuredImage" class="img-thumbnail" />
+                @if (Model.FeatureImageUrl != null)
+                {
+                    <img src="@Model.FeatureImageUrl" id="featuredImage" class="img-thumbnail" />
+                } else
+                {
+                    <img id="featuredImage" class="img-thumbnail" />
+                }
             </div>
 
             <div class="mb-3">

@@ -19,9 +19,12 @@ namespace Bloggie.Web.Controllers
         {
             var result = await _imageService.UploadAsync(file);
 
-            return !string.IsNullOrWhiteSpace(result)
-                ? Ok(result)
-                : BadRequest();
+            if (result is null)
+            {
+                return BadRequest();
+            }
+
+            return Ok(new { link = result });
         }
     }
 }

@@ -25,6 +25,7 @@ else
         <table class="table">
             <thead>
                 <tr>
+                    <th>Picture</th>
                     <th>Heading</th>
                     <th>Page Title</th>
                     <th>Short Description</th>
@@ -36,6 +37,7 @@ else
                 @foreach (var blog in Model.Posts)
                 {
                     <tr>
+                        <td><img src="@blog.FeatureImageUrl" style="width: 40px" class="img-fluid border-2 p-1" /></td>
                         <td>@blog.Heading</td>
                         <td>@blog.PageTitle</td>
                         <td>@blog.ShortDescription</td>

@@ -8,10 +8,12 @@ namespace Bloggie.Web.Pages.Admin.Blogs;
 public class CreateModel : PageModel
 {
     private readonly IBlogPostService _blogPostService;
+    private readonly IImageService _imageService;
 
-    public CreateModel(IBlogPostService blogPostService)
+    public CreateModel(IBlogPostService blogPostService, IImageService imageService)
     {
         _blogPostService = blogPostService;
+        _imageService = imageService;
     }
 
     public void OnGet()
@@ -20,6 +22,9 @@ public class CreateModel : PageModel
 
     [BindProperty]
     public BlogPost BlogPost { get; set; } = default!;
+
+    [BindProperty]
+    public string ImageUrl { get; set; } = default!;
 
     public async Task<IActionResult> OnPostAsync()
     {
