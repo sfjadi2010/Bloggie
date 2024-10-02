@@ -22,11 +22,6 @@
             const featuredImage = document.getElementById('featuredImage');
             const featureImageUrl = document.getElementById('FeatureImageUrl');
 
-            console.log(featureImageUrl);
-            if (!featuredImage && featureImageUrl) {
-                featuredImage.src = featureImageUrl.value;
-            }
-
             async function uploadFeatureImage(e)
             {
                 let data = new FormData();
