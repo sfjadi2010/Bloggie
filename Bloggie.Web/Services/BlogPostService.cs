@@ -42,7 +42,10 @@ public class BlogPostService : IBlogPostService
     /// <inheritdoc />
     public async Task<IEnumerable<BlogPost>> GetAllAsync()
     {
-        return await _context.BlogPosts.ToListAsync();
+        return await _context
+            .BlogPosts
+            .AsNoTracking()
+            .ToListAsync();
     }
 
     /// <inheritdoc />
@@ -53,6 +56,22 @@ public class BlogPostService : IBlogPostService
         if (blogPost is null)
         {
             throw new KeyNotFoundException($"The blog post with ID {id} was not found.");
+        }
+
+        return blogPost;
+    }
+
+    /// <inheritdoc />
+    public async Task<BlogPost> GetByUrlHandleAsync(string urlHandle)
+    {
+        var blogPost = await _context
+            .BlogPosts
+            .AsNoTracking()
+            .FirstOrDefaultAsync(b => b.UrlHandle.ToLower() == urlHandle.ToLower());
+
+        if (blogPost is null)
+        {
+            throw new KeyNotFoundException($"The blog post with ID {urlHandle} was not found.");
         }
 
         return blogPost;

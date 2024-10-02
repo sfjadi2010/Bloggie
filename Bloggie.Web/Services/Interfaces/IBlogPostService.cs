@@ -21,6 +21,13 @@ public interface IBlogPostService
     Task<BlogPost> GetAsync(Guid id);
 
     /// <summary>
+    /// Retrieves a blog post by its ID asynchronously.
+    /// </summary>
+    /// <param name="urlHandle">The urlHandle of the blog post.</param>
+    /// <returns>A task that represents the asynchronous operation. The task result contains the blog post.</returns>
+    Task<BlogPost> GetByUrlHandleAsync(string urlHandle);
+
+    /// <summary>
     /// Creates a new blog post asynchronously.
     /// </summary>
     /// <param name="post">The blog post to create.</param>

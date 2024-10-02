@@ -1,20 +1,36 @@
+using Bloggie.Web.Models.Domain;
+using Bloggie.Web.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Bloggie.Web.Pages
+namespace Bloggie.Web.Pages;
+
+public class IndexModel : PageModel
 {
-    public class IndexModel : PageModel
+    private readonly IBlogPostService _blogPostService;
+    private readonly ILogger<IndexModel> _logger;
+
+    public IndexModel(IBlogPostService blogPostService, ILogger<IndexModel> logger)
     {
-        private readonly ILogger<IndexModel> _logger;
+        _blogPostService = blogPostService;
+        _logger = logger;
+    }
 
-        public IndexModel(ILogger<IndexModel> logger)
+    public IEnumerable<BlogPost> BlogPosts { get; set; } = default!;
+
+    public async Task<IActionResult> OnGet()
+    {
+        var result = await _blogPostService.GetAllAsync();
+
+        if (result is null)
         {
-            _logger = logger;
+            return NotFound();
+        }
+        else
+        {
+            BlogPosts = result;
         }
 
-        public void OnGet()
-        {
-
-        }
+        return Page();
     }
 }
