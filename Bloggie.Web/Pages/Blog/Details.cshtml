@@ -1,7 +1,7 @@
 ﻿@page "/blog/{urlHandle}"
 @model Bloggie.Web.Pages.Blog.DetailsModel
 @{
-    ViewData["Title"] = "Blog Details" ;
+    ViewData["Title"] = Model.BlogPost.PageTitle ;
 }
 
 <div class="container my-5">
