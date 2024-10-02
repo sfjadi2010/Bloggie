@@ -11,11 +11,16 @@
             {
                 <h1 class="mb-3">@Model.BlogPost.Heading</h1>
 
-                <div class="d-flex justify-content-between">
+                <div class="d-flex justify-content-between mb-3">
                     <span class="text-secondary">Author: @Model.BlogPost.Author</span>
                     <span class="text-secondary">Date Published: @Model.BlogPost.PublicationDate.ToShortDateString()</span>
                 </div>
                 
+                <img src="@Model.BlogPost.FeatureImageUrl" class="d-block img-fluid mb-3" />
+
+                <div class="mb-3 blog-details">
+                    @Html.Raw(Model.BlogPost.Content)
+                </div>
             }
             else
             {
