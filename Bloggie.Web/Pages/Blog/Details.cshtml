@@ -10,7 +10,12 @@
             @if (Model.BlogPost != null)
             {
                 <h1 class="mb-3">@Model.BlogPost.Heading</h1>
-
+                <P>
+                    @foreach (var Tag in Model.BlogPost.Tags)
+                    {
+                        <span class="badge bg-dark">@Tag.Name</span>
+                    }
+                </p>
                 <div class="d-flex justify-content-between mb-3">
                     <span class="text-secondary">Author: @Model.BlogPost.Author</span>
                     <span class="text-secondary">Date Published: @Model.BlogPost.PublicationDate.ToShortDateString()</span>

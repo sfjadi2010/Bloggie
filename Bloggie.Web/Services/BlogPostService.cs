@@ -71,6 +71,7 @@ public class BlogPostService : IBlogPostService
     {
         var blogPost = await _context
             .BlogPosts
+            .Include(b => b.Tags)
             .AsNoTracking()
             .FirstOrDefaultAsync(b => b.UrlHandle.ToLower() == urlHandle.ToLower());
 

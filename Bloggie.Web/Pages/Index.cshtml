@@ -36,12 +36,19 @@
     else
     {
         <div class="container">
-            <h2 class="mb-5 display-3">Blogs</h2>
+            <h2 class="mb-2 display-3">Blogs</h2>
             @foreach (var blog in Model.BlogPosts)
             {
                 <div class="row justify-content-center">
                     <div class="col-6">
                         <div class="mb-5 bg-light box-shadow">
+                            <P>
+                                @foreach (var Tag in blog.Tags)
+                                {
+                                    <span class="badge bg-dark">@Tag.Name</span>
+                                }
+                            </p>
+
                             <img src="@blog.FeatureImageUrl" alt="@blog.Heading" class="mb-2 d-block img-fluid" />
                             <div class="px-4 py-4">
                                 <h2 class="mb-2">@blog.Heading</h2>
@@ -51,9 +58,7 @@
                                     Date Published: @blog.PublicationDate.ToShortDateString()
                                 </p>
                                 <p class="mb-2">@blog.ShortDescription</p>
-                                <p>
-                                    Tags: @string.Join(", ", @blog.Tags.Select(t => t.Name))
-                                </p>
+                                
                                 <a href="/blog/@blog.UrlHandle" class="btn btn-dark">Read More</a>
                             </div>
                         </div>
