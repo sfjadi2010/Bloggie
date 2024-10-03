@@ -51,6 +51,9 @@
                                     Date Published: @blog.PublicationDate.ToShortDateString()
                                 </p>
                                 <p class="mb-2">@blog.ShortDescription</p>
+                                <p>
+                                    Tags: @string.Join(", ", @blog.Tags.Select(t => t.Name))
+                                </p>
                                 <a href="/blog/@blog.UrlHandle" class="btn btn-dark">Read More</a>
                             </div>
                         </div>

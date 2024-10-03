@@ -44,6 +44,7 @@ public class BlogPostService : IBlogPostService
     {
         return await _context
             .BlogPosts
+            .Include(b => b.Tags)
             .AsNoTracking()
             .ToListAsync();
     }
