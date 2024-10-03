@@ -84,7 +84,11 @@ public class BlogPostService : IBlogPostService
     /// <inheritdoc />
     public async Task<BlogPost> UpdateAsync(BlogPost post)
     {
+        ArgumentNullException.ThrowIfNull(post, nameof(post));
+
+        _context.Tags.RemoveRange(_context.Tags.Where(t => t.BlogPostId == post.Id));
         _context.BlogPosts.Update(post);
+
         await _context.SaveChangesAsync();
 
         return post;
