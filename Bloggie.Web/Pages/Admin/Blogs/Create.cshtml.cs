@@ -1,3 +1,4 @@
+using Bloggie.Web.Models;
 using Bloggie.Web.Models.Domain;
 using Bloggie.Web.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -10,25 +11,28 @@ public class CreateModel : PageModel
     private readonly IBlogPostService _blogPostService;
     private readonly IImageService _imageService;
 
+    [BindProperty]
+    public BlogPostViewModel BlogPostViewModel { get; set; } = new();
+
     public CreateModel(IBlogPostService blogPostService, IImageService imageService)
     {
         _blogPostService = blogPostService;
         _imageService = imageService;
     }
 
-    public void OnGet()
-    {
-    }
-
-    [BindProperty]
-    public BlogPost BlogPost { get; set; } = default!;
-
-    [BindProperty]
-    public string ImageUrl { get; set; } = default!;
+    public void OnGet() { }
 
     public async Task<IActionResult> OnPostAsync()
     {
-        await _blogPostService.CreateAsync(BlogPost);
+        if (!ModelState.IsValid)
+        {
+            return Page();
+        }
+        BlogPostViewModel.BlogPost.Tags = BlogPostViewModel.Tags.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+            .Select(t => new Tag { Name = t.Trim() })
+            .ToList();
+
+        await _blogPostService.CreateAsync(BlogPostViewModel.BlogPost);
 
         return RedirectToPage("/Admin/Blogs/List");
     }

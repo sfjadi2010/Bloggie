@@ -10,12 +10,12 @@
     </div>
 </div>
 
-@await Html.PartialAsync("PartialViews/BlogForm", Model.BlogPost)
+@await Html.PartialAsync("PartialViews/BlogForm", Model.BlogPostViewModel)
 
 @section Scripts {
     <script>
         $(document).ready(function () {
-            var editor = new FroalaEditor('#Content');
+            var editor = new FroalaEditor('#BlogPost_Content', { imageUploadURL: '/api/images' });
         });
     </script>
 }

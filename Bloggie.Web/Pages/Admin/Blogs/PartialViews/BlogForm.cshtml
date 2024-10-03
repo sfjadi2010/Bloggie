@@ -1,26 +1,27 @@
-﻿@model Bloggie.Web.Models.Domain.BlogPost
+﻿@model Bloggie.Web.Models.BlogPostViewModel
 
 <div>
     <div class="container">
         <form method="post">
+            <input asp-for="BlogPost.Id" type="hidden" />
             <div class="mb-3">
-                <label class="form-lable" asp-for="Heading"></label>
-                <input class="form-control" asp-for="Heading" type="text" />
+                <label class="form-lable" asp-for="BlogPost.Heading"></label>
+                <input class="form-control" asp-for="BlogPost.Heading" type="text" />
             </div>
 
             <div class="mb-3">
-                <label class="form-lable" asp-for="PageTitle"></label>
-                <input class="form-control" asp-for="PageTitle" type="text" />
+                <label class="form-lable" asp-for="BlogPost.PageTitle"></label>
+                <input class="form-control" asp-for="BlogPost.PageTitle" type="text" />
             </div>
 
             <div class="mb-3">
-                <label class="form-lable" asp-for="ShortDescription"></label>
-                <input class="form-control" asp-for="ShortDescription" type="text" />
+                <label class="form-lable" asp-for="BlogPost.ShortDescription"></label>
+                <input class="form-control" asp-for="BlogPost.ShortDescription" type="text" />
             </div>
 
             <div class="mb-3">
-                <label class="form-lable" asp-for="Content"></label>
-                <textarea class="form-control" asp-for="Content" rows="10"></textarea>
+                <label class="form-lable" asp-for="BlogPost.Content"></label>
+                <textarea class="form-control" asp-for="BlogPost.Content" rows="10"></textarea>
             </div>
 
             <div class="input-group mb-3">
@@ -29,9 +30,9 @@
             </div>
 
             <div class="mb-3">
-                @if (Model.FeatureImageUrl != null)
+                @if (Model.BlogPost?.FeatureImageUrl != null)
                 {
-                    <img src="@Model.FeatureImageUrl" id="featuredImage" class="img-thumbnail" />
+                    <img src="@Model.BlogPost.FeatureImageUrl" id="featuredImage" class="img-thumbnail" />
                 } else
                 {
                     <img id="featuredImage" class="img-thumbnail" />
@@ -39,29 +40,34 @@
             </div>
 
             <div class="mb-3">
-                <label class="form-lable" asp-for="FeatureImageUrl"></label>
-                <input readonly class="form-control" asp-for="FeatureImageUrl" type="text" />
+                <label class="form-lable" asp-for="BlogPost.FeatureImageUrl"></label>
+                <input readonly class="form-control" asp-for="BlogPost.FeatureImageUrl" type="text" />
             </div>
 
             <div class="mb-3">
-                <label class="form-lable" asp-for="UrlHandle"></label>
-                <input class="form-control" asp-for="UrlHandle" type="text" />
+                <label class="form-lable" asp-for="BlogPost.UrlHandle"></label>
+                <input class="form-control" asp-for="BlogPost.UrlHandle" type="text" />
             </div>
 
             <div class="mb-3">
-                <label class="form-lable" asp-for="PublicationDate"></label>
-                <input class="form-control" asp-for="PublicationDate" type="date" />
+                <label class="form-lable" asp-for="BlogPost.PublicationDate"></label>
+                <input class="form-control" asp-for="BlogPost.PublicationDate" type="date" />
             </div>
 
-            <div action="mb-3">
-                <label class="form-lable" asp-for="Author"></label>
-                <input class="form-control" asp-for="Author" type="text" />
+            <div class="mb-3">
+                <label class="form-lable" asp-for="BlogPost.Author"></label>
+                <input class="form-control" asp-for="BlogPost.Author" type="text" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" asp-for="Tags">Tags (Comma separated)</label>
+                <input class="form-control" type="text" asp-for="Tags" />
             </div>
 
             <div class="mb-3">
                 <div class="form-check">
-                    <input class="form-check-input" asp-for="Visible" type="checkbox" />
-                    <label class="form-check-lable" asp-for="Visible"></label>
+                    <input class="form-check-input" asp-for="BlogPost.Visible" type="checkbox" />
+                    <label class="form-check-lable" asp-for="BlogPost.Visible"></label>
                 </div>
             </div>
 

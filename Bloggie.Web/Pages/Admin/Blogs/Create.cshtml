@@ -11,16 +11,16 @@
 </div>
 
 @Html.AntiForgeryToken()
-@await Html.PartialAsync("PartialViews/BlogForm", Model.BlogPost)
+@await Html.PartialAsync("PartialViews/BlogForm", Model.BlogPostViewModel)
 
 @section Scripts {
     <script>
         $(document).ready(function () {
-            var editor = new FroalaEditor('#Content', { imageUploadURL: '/api/images'});
+            var editor = new FroalaEditor('#BlogPost_Content', { imageUploadURL: '/api/images'});
 
             const imageFileUpload = document.getElementById('imageFileUpload');
             const featuredImage = document.getElementById('featuredImage');
-            const featureImageUrl = document.getElementById('FeatureImageUrl');
+            const featureImageUrl = document.getElementById('BlogPost_FeatureImageUrl');
 
             async function uploadFeatureImage(e)
             {

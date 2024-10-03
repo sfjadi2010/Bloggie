@@ -51,7 +51,11 @@ public class BlogPostService : IBlogPostService
     /// <inheritdoc />
     public async Task<BlogPost> GetAsync(Guid id)
     {
-        var blogPost = await _context.BlogPosts.FindAsync(id);
+        var blogPost = await _context
+            .BlogPosts
+            .Include(b => b.Tags)
+            .AsNoTracking()
+            .FirstOrDefaultAsync(b => b.Id == id);
 
         if (blogPost is null)
         {

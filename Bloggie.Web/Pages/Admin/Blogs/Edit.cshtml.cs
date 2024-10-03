@@ -1,3 +1,4 @@
+using Bloggie.Web.Models;
 using Bloggie.Web.Models.Domain;
 using Bloggie.Web.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -15,7 +16,7 @@ public class EditModel : PageModel
     }
 
     [BindProperty]
-    public BlogPost BlogPost { get; set; } = default!;
+    public BlogPostViewModel BlogPostViewModel { get; set; } = new();
 
     public async Task<IActionResult> OnGetAsync(Guid id)
     {
@@ -23,7 +24,9 @@ public class EditModel : PageModel
 
         if (result is not null)
         {
-            BlogPost = result;
+            BlogPostViewModel.BlogPost = result;
+
+            BlogPostViewModel.Tags = string.Join(", ", BlogPostViewModel.BlogPost.Tags.Select(t => t.Name));
         }
         return Page();
     }
@@ -35,7 +38,9 @@ public class EditModel : PageModel
             return Page();
         }
 
-        await _blogPostService.UpdateAsync(BlogPost);
+        BlogPostViewModel.BlogPost.Tags = BlogPostViewModel.Tags.Split(',').Select(t => new Tag { Name = t.Trim() }).ToList();
+
+        await _blogPostService.UpdateAsync(BlogPostViewModel.BlogPost);
 
         return RedirectToPage("/Admin/Blogs/List");
     }
