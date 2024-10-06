@@ -1,6 +1,6 @@
 ﻿using Bloggie.Web.Models.Domain;
 
-namespace Bloggie.Web.Models;
+namespace Bloggie.Web.Models.ViewModels;
 
 public sealed class BlogPostViewModel
 {

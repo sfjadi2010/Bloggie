@@ -1,0 +1,37 @@
+﻿@page
+@model Bloggie.Web.Pages.RegisterModel
+@{
+    ViewData["Title"] = "Register User";
+}
+
+<div class="container mx-auto">
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-g">
+            <h1 class="mt-5 mb-3">Register User</h1>
+            <form method="post">
+                <div class="mb-3">
+                    <label class="form-label" asp-for="RegisterViewModel.Username">Username</label>
+                    <input type="text" class="form-control" asp-for="RegisterViewModel.Username" />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" asp-for="RegisterViewModel.Email">Email Address</label>
+                    <input type="email" class="form-control" asp-for="RegisterViewModel.Email"  />
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label" asp-for="RegisterViewModel.Password">Password</label>
+                    <input type="password" class="form-control" asp-for="RegisterViewModel.Password" />
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label" asp-for="RegisterViewModel.Password">Confirm Password</label>
+                    <input type="password" class="form-control" asp-for="RegisterViewModel.Password" />
+                </div>
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-primary">Register</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
