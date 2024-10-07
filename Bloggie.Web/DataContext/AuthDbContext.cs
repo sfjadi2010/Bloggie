@@ -54,7 +54,8 @@ public class AuthDbContext : IdentityDbContext
             Id = "cd4bda95-a05b-449d-bb80-7ddfbecc1860",
             UserName = "superadmin@bloggie.com",
             NormalizedUserName = "SUPERADMIN@BLOGGIE.COM",
-            Email = "superadmin@bloggie.com"
+            Email = "superadmin@bloggie.com",
+            NormalizedEmail = "SUPERADMIN@BLOGGIE.COM"
         };
 
         superAdminUser.PasswordHash = new PasswordHasher<IdentityUser>().HashPassword(superAdminUser, "P@$$w0rd");

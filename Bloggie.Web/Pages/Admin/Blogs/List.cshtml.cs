@@ -1,9 +1,12 @@
 using Bloggie.Web.Models.Domain;
 using Bloggie.Web.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Bloggie.Web.Pages.Admin.Blogs;
+
+[Authorize(Roles = "Admin")]
 public class ListModel : PageModel
 {
     private readonly IBlogPostService _blogPostService;

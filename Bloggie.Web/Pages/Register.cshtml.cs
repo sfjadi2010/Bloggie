@@ -25,7 +25,7 @@ namespace Bloggie.Web.Pages
         {
             var user = new IdentityUser
             {
-                UserName = RegisterViewModel.Email,
+                UserName = RegisterViewModel.Username,
                 Email = RegisterViewModel.Email
             };
 
@@ -35,10 +35,15 @@ namespace Bloggie.Web.Pages
 
             if (result.Succeeded)
             {
+                var addUserRoleResult = await _userManager.AddToRoleAsync(user, "User");
 
+                if (addUserRoleResult.Succeeded)
+                {
+                    return RedirectToPage("/Login");
+                }
             }
 
-            return RedirectToPage("/Index");
+            return Page();
         }
     }
 }
