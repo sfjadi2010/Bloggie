@@ -35,4 +35,8 @@ public partial class BlogPost
     public bool Visible { get; set; }
 
     public virtual List<Tag> Tags { get; set; } = new();
+
+    public virtual List<BlogPostLike> BlogPostLikes { get; set; } = new();
+
+    public virtual List<BlogPostComment> BlogPostComments { get; set; } = new();
 }

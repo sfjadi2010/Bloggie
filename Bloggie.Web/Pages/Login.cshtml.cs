@@ -21,17 +21,22 @@ public class LoginModel : PageModel
     {
     }
 
-    public async Task<IActionResult> OnPostAsync()
+    public async Task<IActionResult> OnPostAsync(string ReturnUrl)
     {
-        if (!ModelState.IsValid)
-        {
-            return Page();
-        }
-
         var result = await _signInManager.PasswordSignInAsync(LoginViewModel.Username, LoginViewModel.Password, false, false);
 
         if (result.Succeeded)
         {
+            if (!string.IsNullOrEmpty(ReturnUrl) && Url.IsLocalUrl(ReturnUrl))
+            {
+                return RedirectToPage(ReturnUrl);
+            }
+
+            if (User.IsInRole("Admin"))
+            {
+                return RedirectToPage("/Admin/Blogs/List");
+            }
+
             return RedirectToPage("/Index");
         }
 

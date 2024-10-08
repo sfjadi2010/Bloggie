@@ -1,5 +1,9 @@
 ﻿@page "/blog/{urlHandle}"
 @model Bloggie.Web.Pages.Blog.DetailsModel
+
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<IdentityUser> UserManager
+
 @{
     ViewData["Title"] = Model.BlogPost.PageTitle ;
 }
@@ -7,20 +11,31 @@
 <div class="container my-5">
     <div class="row justify-content-center">
         <div class="col-12 col-lg-6">
+            @Html.AntiForgeryToken()
             @if (Model.BlogPost != null)
             {
                 <h1 class="mb-3">@Model.BlogPost.Heading</h1>
-                <P>
-                    @foreach (var Tag in Model.BlogPost.Tags)
-                    {
-                        <span class="badge bg-dark">@Tag.Name</span>
-                    }
-                </p>
+                
                 <div class="d-flex justify-content-between mb-3">
                     <span class="text-secondary">Author: @Model.BlogPost.Author</span>
                     <span class="text-secondary">Date Published: @Model.BlogPost.PublicationDate.ToShortDateString()</span>
                 </div>
+
+                <div class="mb-3">
+                    <span>
+                        <a id="btnLike" style="cursor: pointer"><i class="bi bi-hand-thumbs-up"></i></a> @Model.Likes likes
+                    </span>
+                </div>
                 
+                <div class="mb-3">
+                    <P>
+                        @foreach (var Tag in Model.BlogPost.Tags)
+                        {
+                            <span class="badge bg-dark">@Tag.Name</span>
+                        }
+                    </p>
+                </div>
+
                 <img src="@Model.BlogPost.FeatureImageUrl" class="d-block img-fluid mb-3" />
 
                 <div class="mb-3 blog-details">
@@ -37,3 +52,17 @@
     </div>
 
 </div>
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+
+            // @UserManager.GetUserId(User)
+            const btnLike = document.getElementById('btnLike');
+            var token = document.querySelector('input[name="__RequestVerificationToken"]').value;
+            btnLike.addEventListener('click', async () => {
+                
+            });
+        });
+    </script>
+}

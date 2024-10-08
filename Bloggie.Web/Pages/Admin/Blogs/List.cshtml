@@ -100,13 +100,13 @@ else
                 },
                 body: JSON.stringify(blogIdToDelete)
             })
-                .then(response => {
-                    if (response.ok) {
-                        location.reload();
-                    } else {
-                        alert('Failed to delete the blog post.');
-                    }
-                });
+            .then(response => {
+                if (response.ok) {
+                    location.reload();
+                } else {
+                    alert('Failed to delete the blog post.');
+                }
+            });
         });
     </script>
 }

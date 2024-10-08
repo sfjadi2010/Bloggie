@@ -2,15 +2,18 @@
 
 namespace Bloggie.Web.Models.Domain;
 
-public partial class Tag
+public partial class BlogPostComment
 {
     [Key]
     public Guid Id { get; set; }
 
-    [Display(Name = "Name")]
-    public required string Name { get; set; }
-
     public Guid BlogPostId { get; set; }
+
+    public string Description { get; set; } = null!;
+
+    public Guid UserId { get; set; }
+
+    public DateOnly CommentDate { get; set; }
 
     public virtual BlogPost BlogPost { get; set; } = null!;
 }
