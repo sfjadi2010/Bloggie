@@ -70,7 +70,7 @@
                         'Content-Type': 'application/json',
                         'RequestVerificationToken': token
                     },
-                    body: JSON.stringify({ blogPostId: '@Model.BlogPost.Id' })
+                    body: JSON.stringify('@Model.BlogPost.Id')
                 })
                 .then(response => response.json())
                 .then(result => totalLikes.innerHTML = result);
