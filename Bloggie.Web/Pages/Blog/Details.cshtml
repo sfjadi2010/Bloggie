@@ -2,7 +2,7 @@
 @model Bloggie.Web.Pages.Blog.DetailsModel
 
 @using Microsoft.AspNetCore.Identity
-@inject UserManager<IdentityUser> UserManager
+@inject UserManager<IdentityUser> userManager
 
 @{
     ViewData["Title"] = Model.BlogPost.PageTitle ;
@@ -23,7 +23,8 @@
 
                 <div class="mb-3">
                     <span>
-                        <a id="btnLike" style="cursor: pointer"><i class="bi bi-hand-thumbs-up"></i></a> @Model.Likes likes
+                        <a id="btnLike" style="cursor: pointer"><i class="bi bi-hand-thumbs-up"></i></a>
+                        <span id="totalLikes">@Model.Likes</span> likes
                     </span>
                 </div>
                 
@@ -57,11 +58,38 @@
     <script>
         $(document).ready(function () {
 
-            // @UserManager.GetUserId(User)
             const btnLike = document.getElementById('btnLike');
+            const totalLikes = document.getElementById('totalLikes');
+
             var token = document.querySelector('input[name="__RequestVerificationToken"]').value;
+
+            async function getLikes() { 
+                fetch('/Blog/Details?handler=likes', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'RequestVerificationToken': token
+                    },
+                    body: JSON.stringify({ blogPostId: '@Model.BlogPost.Id' })
+                })
+                .then(response => response.json())
+                .then(result => totalLikes.innerHTML = result);
+            }
+
             btnLike.addEventListener('click', async () => {
-                
+                fetch('/Blog/Details?handler=like', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'RequestVerificationToken': token
+                    },
+                    body: JSON.stringify({ blogPostId: '@Model.BlogPost.Id', userId: '@userManager.GetUserId(User)' })
+                })
+                .then(response => {
+                    btnLike.innerHTML = '<i class="bi bi-hand-thumbs-up-fill"></i>';
+                    btnLike.removeEventListener('click', () => { });
+                    getLikes();
+                });
             });
         });
     </script>

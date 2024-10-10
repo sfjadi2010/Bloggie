@@ -34,9 +34,19 @@ public class BlogPostLikeService : IBlogPostLikeService
         throw new NotImplementedException();
     }
 
-    public Task<BlogPostLike> GetByBlogPostIdAndUserIdAsync(Guid blogPostId, Guid userId)
+    public async Task<BlogPostLike> GetByBlogPostIdAndUserIdAsync(Guid blogPostId, Guid userId)
     {
-        throw new NotImplementedException();
+        var result = await _context
+            .BlogPostLikes
+            .AsNoTracking()
+            .FirstOrDefaultAsync(b => b.BlogPostId == blogPostId && b.UserId == userId);
+
+        if (result is not null)
+        {
+            return result;
+        }
+
+        return null;
     }
 
     public async Task<int> GetLikesCountByBlogPostIdAsync(Guid blogPostId)

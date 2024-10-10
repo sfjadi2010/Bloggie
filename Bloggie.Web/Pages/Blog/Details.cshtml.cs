@@ -41,8 +41,18 @@ public class DetailsModel : PageModel
 
     public async Task<IActionResult> OnPostLikeAsync([FromBody] BlogPostLikeViewModel likeViewModel)
     {
-        await _blogPostLikeService.LikeAsync(likeViewModel.BlogPostId, likeViewModel.UserId);
+        var isLikedExist = await _blogPostLikeService.GetByBlogPostIdAndUserIdAsync(likeViewModel.BlogPostId, likeViewModel.UserId);
+        if (isLikedExist is null)
+        {
+            await _blogPostLikeService.LikeAsync(likeViewModel.BlogPostId, likeViewModel.UserId);
+        }
 
-        return RedirectToPage();
+        return Page();
+    }
+
+    public async Task<IActionResult> OnPostLikesAsync([FromBody] Guid BlogPostId)
+    {
+        var result = await _blogPostLikeService.GetLikesCountByBlogPostIdAsync(BlogPostId);
+        return new JsonResult(result);
     }
 }
