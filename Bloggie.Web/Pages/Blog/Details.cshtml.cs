@@ -11,16 +11,19 @@ public class DetailsModel : PageModel
 {
     private readonly IBlogPostService _blogPostService;
     private readonly IBlogPostLikeService _blogPostLikeService;
+    private readonly IBlogPostCommentService _blogPostCommentService;
     private readonly SignInManager<IdentityUser> _signInManager;
     private readonly UserManager<IdentityUser> _userManager;
 
     public DetailsModel(IBlogPostService blogPostService,
         IBlogPostLikeService blogPostLikeService,
+        IBlogPostCommentService blogPostCommentService,
         SignInManager<IdentityUser> signInManager,
         UserManager<IdentityUser> userManager)
     {
         _blogPostService = blogPostService;
         _blogPostLikeService = blogPostLikeService;
+        _blogPostCommentService = blogPostCommentService;
         _signInManager = signInManager;
         _userManager = userManager;
     }
@@ -34,6 +37,15 @@ public class DetailsModel : PageModel
     [BindProperty]
     public BlogPost BlogPost { get; set; } = default!;
 
+    [BindProperty]
+    public string BlogPostComment { get; set; } = default!;
+
+    [BindProperty]
+    public Guid BlogPostId { get; set; } = default!;
+
+    [BindProperty]
+    public IEnumerable<BlogPostComment> Comments { get; set; }
+
     public async Task<IActionResult> OnGet(string urlHandle)
     {
         var result = await _blogPostService.GetByUrlHandleAsync(urlHandle);
@@ -42,19 +54,43 @@ public class DetailsModel : PageModel
         {
             BlogPost = result;
 
+            BlogPostId = result.Id;
+
+            // Comments = await _blogPostCommentService.GetAllCommentsByIdAsync(BlogPost.Id);
+
+            Comments = BlogPost.BlogPostComments;
+
             if (_signInManager.IsSignedIn(User))
             {
                 var blogPostLikes = await _blogPostLikeService.GetAllByBlogPostIdAsync(BlogPost.Id);
 
                 var userId = _userManager.GetUserId(User);
 
-                Liked = blogPostLikes.Any(b => b.UserId == new Guid(userId));
+                Liked = blogPostLikes.Any(b => b.UserId == Guid.Parse(userId));
             }
 
             Likes = await _blogPostLikeService.GetLikesCountByBlogPostIdAsync(BlogPost.Id);
         }
 
         return Page();
+    }
+
+    public async Task<IActionResult> OnPost(string urlHandle)
+    {
+        if (_signInManager.IsSignedIn(User) && !string.IsNullOrEmpty(BlogPostComment))
+        {
+            var blogPostComment = new BlogPostComment
+            {
+                BlogPostId = BlogPostId,
+                Description = BlogPostComment,
+                UserId = Guid.Parse(_userManager.GetUserId(User)),
+                CommentDate = DateOnly.FromDateTime(DateTime.Now)
+            };
+
+            await _blogPostCommentService.AddCommentAsync(blogPostComment);
+        }
+
+        return RedirectToPage("/Blog/Details", new { urlHandle = urlHandle });
     }
 
     public async Task<IActionResult> OnPostLikeAsync([FromBody] BlogPostLikeViewModel likeViewModel)

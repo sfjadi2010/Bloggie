@@ -45,6 +45,7 @@ public class BlogPostService : IBlogPostService
         return await _context
             .BlogPosts
             .Include(b => b.Tags)
+            .Include(c => c.BlogPostComments)
             .AsNoTracking()
             .ToListAsync();
     }
@@ -55,6 +56,7 @@ public class BlogPostService : IBlogPostService
         var blogPost = await _context
             .BlogPosts
             .Include(b => b.Tags)
+            .Include(c => c.BlogPostComments)
             .AsNoTracking()
             .FirstOrDefaultAsync(b => b.Id == id);
 
@@ -72,6 +74,7 @@ public class BlogPostService : IBlogPostService
         var blogPost = await _context
             .BlogPosts
             .Include(b => b.Tags)
+            .Include(c => c.BlogPostComments)
             .AsNoTracking()
             .FirstOrDefaultAsync(b => b.UrlHandle.ToLower() == urlHandle.ToLower());
 

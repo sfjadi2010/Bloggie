@@ -47,6 +47,36 @@
                 <div class="mb-3 blog-details">
                     @Html.Raw(Model.BlogPost.Content)
                 </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Comments</h5>
+                        @if (signedInManager.IsSignedIn(User))
+                        {
+                            <form method="post">
+                                <input type="hidden" asp-for="@Model.BlogPostId" />
+                                <div class="mb-2">
+                                    <label class="form-label">Comment Description</label>
+                                    <input type="text" class="form-control" asp-for="@Model.BlogPostComment"/>
+                                </div>
+                                <div class="mb-3">
+                                    <button type="submit" class="btn btn-primary">Add Comment</button>
+                                </div>
+                            </form>
+                        }
+                    </div>
+                    <div class="card-body">
+                        @if (@Model.Comments != null && @Model.Comments.ToList().Count > 0)
+                        {
+                            <ul class="list-group">
+                                @foreach (var comment in Model.Comments)
+                                {
+                                    <li class="list-group">@comment.Description</li>
+                                }
+                             </ul>
+                        }
+                    </div>
+                </div>
             }
             else
             {
@@ -65,6 +95,8 @@
 
             const btnLike = document.getElementById('btnLike');
             const totalLikes = document.getElementById('totalLikes');
+
+            if (btnLike === null) return;
 
             var token = document.querySelector('input[name="__RequestVerificationToken"]').value;
 
