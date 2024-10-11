@@ -58,6 +58,16 @@ public class DetailsModel : PageModel
 
             // Comments = await _blogPostCommentService.GetAllCommentsByIdAsync(BlogPost.Id);
 
+            //Comments = BlogPost.BlogPostComments;
+
+            foreach (var comment in BlogPost.BlogPostComments)
+            {
+                if (comment != null && comment.UserId != Guid.Empty)
+                {
+                    comment.UserName = (await _userManager.FindByIdAsync(comment.UserId.ToString())).UserName;
+                }
+            }
+
             Comments = BlogPost.BlogPostComments;
 
             if (_signInManager.IsSignedIn(User))

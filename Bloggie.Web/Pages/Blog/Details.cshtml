@@ -68,12 +68,20 @@
                     <div class="card-body">
                         @if (@Model.Comments != null && @Model.Comments.ToList().Count > 0)
                         {
-                            <ul class="list-group">
-                                @foreach (var comment in Model.Comments)
-                                {
-                                    <li class="list-group">@comment.Description</li>
-                                }
-                             </ul>
+                            @foreach (var comment in Model.Comments)
+                            {
+                                <div class="card mb-3">
+                                    <div class="card-body">
+                                        <div>
+                                            @comment.Description
+                                        </div>
+                                        <div class="d-flex justify-content-between">
+                                            <span class="text-secondary">@comment.UserName</span>
+                                            <span class="text-secondary">@comment.CommentDate.ToShortDateString()</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
                         }
                     </div>
                 </div>
