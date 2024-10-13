@@ -1,0 +1,49 @@
+﻿@page
+@model Bloggie.Web.Pages.Admin.Users.IndexModel
+@{
+    ViewData["Title"] = "Users List";
+}
+
+<div class="bg-secondary bg-opacity-10 py-2 mb-5">
+    <div class="container">
+        <h1 class="display-4">Users</h1>
+    </div>
+</div>
+
+@if (!Model.Users.Any())
+{
+    <div class="container">
+        <div class="alert alert-info" role="alert">
+            @Model.Users.Count() users found.
+        </div>
+    </div>
+}
+else
+{
+    <div class="container">
+        <div class="mb-3 d-flex justify-content-end">
+            <a asp-page="/Admin/Users/Create" class="btn btn-primary">Create User</a>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in Model.Users)
+                {
+                    <tr>
+                        <td>@user.UserName</td>
+                        <td>@user.Email</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

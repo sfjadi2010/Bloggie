@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Bloggie.Web.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -49,18 +50,21 @@ public class AuthDbContext : IdentityDbContext
 
         // Seed Super Admin user
         var superAdminId = "cd4bda95-a05b-449d-bb80-7ddfbecc1860";
-        var superAdminUser = new IdentityUser
+        var superAdminUser = new ApplicationUser
         {
             Id = "cd4bda95-a05b-449d-bb80-7ddfbecc1860",
+            FirstName = "Super",
+            LastName = "Admin",
             UserName = "superadmin@bloggie.com",
             NormalizedUserName = "SUPERADMIN@BLOGGIE.COM",
             Email = "superadmin@bloggie.com",
-            NormalizedEmail = "SUPERADMIN@BLOGGIE.COM"
+            NormalizedEmail = "SUPERADMIN@BLOGGIE.COM",
+            PhoneNumber = "888-888-8888"
         };
 
-        superAdminUser.PasswordHash = new PasswordHasher<IdentityUser>().HashPassword(superAdminUser, "P@$$w0rd");
+        superAdminUser.PasswordHash = new PasswordHasher<ApplicationUser>().HashPassword(superAdminUser, "P@$$w0rd");
 
-        modelBuilder.Entity<IdentityUser>().HasData(superAdminUser);
+        modelBuilder.Entity<ApplicationUser>().HasData(superAdminUser);
 
         // Add all roles to super admin user
         var userRoles = new List<IdentityUserRole<string>>

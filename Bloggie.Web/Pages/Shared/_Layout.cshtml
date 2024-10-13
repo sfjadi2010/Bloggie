@@ -1,6 +1,7 @@
-﻿@using Microsoft.AspNetCore.Identity
-@inject SignInManager<IdentityUser> signInManager
-@inject UserManager<IdentityUser> userManager
+﻿@using Bloggie.Web.Models
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> signInManager
+@inject UserManager<ApplicationUser> userManager
 
 <!DOCTYPE html>
 <html lang="en">
@@ -42,6 +43,9 @@
                                     </li>
                                     <li>
                                         <a class="dropdown-item" asp-area="" asp-page="/Admin/Blogs/List">Blog Posts</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" asp-area="" asp-page="/Admin/Users/Index">Users</a>
                                     </li>
                                 </ul>
                             </li>

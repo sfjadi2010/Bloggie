@@ -1,4 +1,5 @@
 using Bloggie.Web.DataContext;
+using Bloggie.Web.Models;
 using Bloggie.Web.Services;
 using Bloggie.Web.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
@@ -20,7 +21,7 @@ builder.Services.AddDbContext<AuthDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("AuthConnection"));
 });
 
-builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<AuthDbContext>();
 
 builder.Services.Configure<IdentityOptions>(options =>
@@ -43,6 +44,7 @@ builder.Services.AddScoped<IBlogPostService, BlogPostService>();
 builder.Services.AddScoped<IImageService, ImageService>();
 builder.Services.AddScoped<IBlogPostLikeService, BlogPostLikeService>();
 builder.Services.AddScoped<IBlogPostCommentService, BlogPostCommentService>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 var app = builder.Build();
 

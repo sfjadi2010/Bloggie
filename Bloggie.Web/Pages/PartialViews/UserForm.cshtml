@@ -1,0 +1,38 @@
+﻿@model Bloggie.Web.Models.ViewModels.UserViewModel
+
+<div>
+    <div class="container">
+        <form method="post">
+            <div class="mb-3">
+                <label class="form-label" asp-for="Email"></label>
+                <input class="form-control" asp-for="Email" type="text" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" asp-for="UserName"></label>
+                <input class="form-control" asp-for="UserName" type="text" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" asp-for="Password"></label>
+                <input class="form-control" asp-for="Password" type="password" />
+            </div>
+
+            <div class="mb-3">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="userOptions" id="userOption" value="User" checked>
+                    <label class="form-check-label" for="userOption">User</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="userOptions" id="userOption" value="Admin">
+                    <label class="form-check-label" for="userOption">Admin</label>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <button class="btn btn-primary" type="submit">Submit</button>
+                <button class="btn btn-secondary" type="button">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>

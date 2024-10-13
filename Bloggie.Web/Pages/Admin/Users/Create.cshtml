@@ -1,0 +1,14 @@
+﻿@page
+@model Bloggie.Web.Pages.Admin.Users.CreateModel
+@{
+    ViewData["Title"] = "Create User";
+}
+
+<div class="bg-secondary bg-opacity-10 py-2 mb-5">
+    <div class="container">
+        <h1>Create user</h1>
+    </div>
+</div>
+
+@Html.AntiForgeryToken()
+@await Html.PartialAsync("PartialViews/UserForm", Model.UserViewModel);

@@ -10,6 +10,16 @@
             <h1 class="mt-5 mb-3">Register User</h1>
             <form method="post">
                 <div class="mb-3">
+                    <label class="form-label" asp-form="RegisterViewModel.FirstName">First Name</label>
+                    <input type="text" class="form-control" asp-for="RegisterViewModel.FirstName" />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" asp-form="RegisterViewModel.FirstName">Last Name</label>
+                    <input type="text" class="form-control" asp-for="RegisterViewModel.LastName" />
+                </div>
+
+                <div class="mb-3">
                     <label class="form-label" asp-for="RegisterViewModel.Username">Username</label>
                     <input type="text" class="form-control" asp-for="RegisterViewModel.Username" />
                 </div>
