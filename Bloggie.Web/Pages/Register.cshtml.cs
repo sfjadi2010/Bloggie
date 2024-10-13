@@ -1,3 +1,4 @@
+using Bloggie.Web.Models;
 using Bloggie.Web.Models.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -7,9 +8,9 @@ namespace Bloggie.Web.Pages
 {
     public class RegisterModel : PageModel
     {
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public RegisterModel(UserManager<IdentityUser> userManager)
+        public RegisterModel(UserManager<ApplicationUser> userManager)
         {
             _userManager = userManager;
         }
@@ -23,10 +24,13 @@ namespace Bloggie.Web.Pages
 
         public async Task<IActionResult> OnPostAsync()
         {
-            var user = new IdentityUser
+            var user = new ApplicationUser
             {
                 UserName = RegisterViewModel.Username,
-                Email = RegisterViewModel.Email
+                Email = RegisterViewModel.Email,
+                FirstName = RegisterViewModel.FirstName,
+                LastName = RegisterViewModel.LastName,
+                PhoneNumber = RegisterViewModel.PhoneNumber
             };
 
             user.PasswordHash = _userManager.PasswordHasher.HashPassword(user, RegisterViewModel.Password);

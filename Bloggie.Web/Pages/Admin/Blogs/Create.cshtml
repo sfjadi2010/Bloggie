@@ -12,7 +12,7 @@
 </div>
 
 @Html.AntiForgeryToken()
-@await Html.PartialAsync("PartialViews/BlogForm", Model.BlogPostViewModel)
+@await Html.PartialAsync("PartialViews/_blogFormView", Model.BlogPostViewModel)
 
 @section Scripts {
     <script>
