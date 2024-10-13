@@ -1,1 +1,13 @@
 ﻿@model Bloggie.Web.Models.Domain.BlogPost
+
+<div class="px-4 py-4">
+    <h2 class="mb-2">@Model.Heading</h2>
+    <p>
+        Author: @Model.Author
+        <br />
+        Date Published: @Model.PublicationDate.ToShortDateString()
+    </p>
+    <p class="mb-2">@Model.ShortDescription</p>
+
+    <a href="/blog/UrlHandle" class="btn btn-dark">Read More</a>
+</div>

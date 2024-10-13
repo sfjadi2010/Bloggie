@@ -1,1 +1,12 @@
 ﻿@model Bloggie.Web.Models.Domain.BlogPost
+
+<div class="mb-5 bg-light box-shadow">
+    <P>
+        @foreach (var Tag in Model.Tags)
+        {
+            <span class="badge bg-dark">@Tag.Name</span>
+        }
+    </p>
+
+    <img src="@Model.FeatureImageUrl" alt="@Model.Heading" class="mb-2 d-block img-fluid" />                            
+</div>
