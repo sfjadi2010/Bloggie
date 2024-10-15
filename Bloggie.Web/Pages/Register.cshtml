@@ -4,51 +4,9 @@
     ViewData["Title"] = "Register User";
 }
 
-<div class="container mx-auto">
-    <div class="row justify-content-center">
-        <div class="col-12 col-lg-g">
-            <h1 class="mt-5 mb-3">Register User</h1>
-            <form method="post">
-                <div class="mb-3">
-                    <label class="form-label" asp-form="RegisterViewModel.FirstName">First Name</label>
-                    <input type="text" class="form-control" asp-for="RegisterViewModel.FirstName" />
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label" asp-form="RegisterViewModel.FirstName">Last Name</label>
-                    <input type="text" class="form-control" asp-for="RegisterViewModel.LastName" />
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label" asp-for="RegisterViewModel.Username">Username</label>
-                    <input type="text" class="form-control" asp-for="RegisterViewModel.Username" />
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label" asp-for="RegisterViewModel.Email">Email Address</label>
-                    <input type="email" class="form-control" asp-for="RegisterViewModel.Email"  />
-                </div>
-                
-                <div class="mb-3">
-                    <label class="form-label" asp-for="RegisterViewModel.Password">Password</label>
-                    <input type="password" class="form-control" asp-for="RegisterViewModel.Password" />
-                </div>
-                
-                <div class="mb-3">
-                    <label class="form-label" asp-for="RegisterViewModel.Password">Confirm Password</label>
-                    <input type="password" class="form-control" asp-for="RegisterViewModel.Password" />
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label" asp-for="RegisterViewModel.PhoneNumber">Phone Number</label>
-                    <input type="email" class="form-control" asp-for="RegisterViewModel.PhoneNumber" />
-                </div>
-
-                <div class="mb-3">
-                    <button type="submit" class="btn btn-primary">Register</button>
-                    <button class="btn btn-secondary">Cancel</button>
-                </div>
-            </form>
-        </div>
+<div class="bg-secondary bg-opacity-10 py-2 mb-5">
+    <div class="container">
+        <h1>Register User</h1>
     </div>
 </div>
+

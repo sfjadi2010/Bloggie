@@ -7,7 +7,7 @@ namespace Bloggie.Web.Pages.Admin.Users;
 public class CreateModel : PageModel
 {
     [BindProperty]
-    public UserViewModel UserViewModel { get; set; } = default!;
+    public RegisterViewModel RegisterViewModel { get; set; } = default!;
     public void OnGet()
     {
     }
